@@ -1,9 +1,9 @@
 def minimize_dfa(n, symbols, final_states, trans):
-    # Step 1: Initial partition (Final & Non-final)
+   
     P = [set(final_states), set(range(n)) - set(final_states)]
     P = [p for p in P if p]
 
-    # Step 2: Partition refinement
+    
     changed = True
     while changed:
         changed = False
@@ -26,13 +26,13 @@ def minimize_dfa(n, symbols, final_states, trans):
 
         P = new_P
 
-    # Step 3: Assign groups
+   
     state_group = {}
     for i, g in enumerate(P):
         for s in g:
             state_group[s] = i
 
-    # Step 4: Build minimized DFA transition table
+    
     min_trans = {}
     for i, g in enumerate(P):
         rep = next(iter(g))
@@ -40,11 +40,9 @@ def minimize_dfa(n, symbols, final_states, trans):
 
     return state_group, min_trans
 
-
-# -------- SAMPLE INPUT --------
-n = 5                      # number of states
-symbols = 2                # number of input symbols
-final_states = [4]         # final state
+n = 5 
+symbols = 2                
+final_states = [4] 
 
 trans = {
     0: [1, 2],
@@ -54,10 +52,9 @@ trans = {
     4: [1, 2]
 }
 
-# -------- PROCESS --------
 groups, min_dfa = minimize_dfa(n, symbols, final_states, trans)
 
-# -------- OUTPUT --------
+
 print("\nMinimized DFA State Groups:")
 for s in range(n):
     print(f"State {s} -> Group {groups[s]}")
